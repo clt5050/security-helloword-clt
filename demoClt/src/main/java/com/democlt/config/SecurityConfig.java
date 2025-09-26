@@ -15,22 +15,19 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
+    //asdad
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-
         UserDetails testUser = User.withUsername("test")
                 .password(encoder.encode("123456"))
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(testUser);
     }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -42,7 +39,6 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form.permitAll())
                 .logout(logout -> logout.permitAll());
-
         return http.build();
     }
 
