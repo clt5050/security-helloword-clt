@@ -23,10 +23,9 @@ public class WebConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // 配置日志拦截器，拦截所有请求但排除错误页面请求
-        registry.addInterceptor(logInterceptor)//将自定义的logInterceptor注册到系统中。
-                .addPathPatterns("/**")//定义拦截范围为 “所有请求”（/**是 Ant 风格路径匹配，代表任意层级的任意路径）。
-                .excludePathPatterns("/error");//排除不需要拦截的路径
+        registry.addInterceptor(logInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/error");
     }
 
 }

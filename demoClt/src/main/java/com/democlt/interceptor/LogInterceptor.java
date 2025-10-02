@@ -18,11 +18,9 @@ public class LogInterceptor implements HandlerInterceptor {
      * @param handler 处理器对象，表示将要执行的处理器方法
      * @return boolean 返回true表示放行请求，继续执行后续处理；返回false表示拦截请求，不再继续执行
      */
-    // 请求处理前执行（记录开始时间）
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) {
-        // 记录请求开始时间
         startTime = System.currentTimeMillis();
         System.out.println("=== 开始请求 ===");
         System.out.println("访问IP: " + request.getRemoteAddr());

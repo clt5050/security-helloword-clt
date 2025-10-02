@@ -32,21 +32,16 @@ public class AuthController {
      * @param password 密码
      * @return 登录成功返回JWT令牌
      */
-    // 负责接收客户端提交的用户名密码、触发认证流程，并在认证通过后生成 JWT 令牌返回
     @PostMapping("/login")
-    public String login(@RequestParam String username,// 接收请求中用户名参数
+    public String login(@RequestParam String username,
                         @RequestParam String password) {// 接收密码参数
 
-        //Spring Security认证
-        // 调用 SecurityConfig.authenticationManager 方法认证用户名密码
-        //创建UsernamePasswordAuthenticationToken对象（Spring Security 的标准 “认证请求令牌”）
-        Authentication authentication = authenticationManager.authenticate(//authenticated属性为false（表示未认证状态
-                new UsernamePasswordAuthenticationToken(username, password)//封装用户名和密码
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(username, password)
         );
 
 
-        // 提取认证成功的信息
-        //authentication.getPrincipal()从认证成功的Authentication对象中获取 “主体信息”，即用户详情（UserDetails类型）。
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
         // 打印
@@ -57,8 +52,6 @@ public class AuthController {
 
 
 
-        // 调用来自JwtUtils中的方法jwtUtils.generateToken(test)根据用户名生成 JWT 令牌。令牌中包含用户名（subject）、过期时间等信息，并通过安全密钥签名。
-        // userDetails.getUsername() → "test"
         System.out.println("生成令牌generateToken(userDetails.getUsername())=[" + jwtUtils.generateToken(userDetails.getUsername())+ " ]");
         String jwt = jwtUtils.generateToken(userDetails.getUsername());
 
